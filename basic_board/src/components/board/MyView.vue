@@ -24,7 +24,7 @@
         <div class="btnWrap">
             <a href="javascript:;" @click="fnList" class="btn">목록</a>
             <a href="javascript:;" @click="fnMod" class="btnAdd btn">수정</a>
-            <!-- <a href="javascript:;" @click="fnDeleteProc" class="btnDelete btn">삭제</a> -->
+            <a href="javascript:;" @click="fnDeleteProc" class="btnDelete btn">삭제</a>
         </div>
     </div>
 </template>
@@ -63,6 +63,22 @@ export default {
         }
         , fnMod() {
             this.$router.push({ path: './write', query: this.body });
+        }
+        , fnDeleteProc() {
+            if (confirm("삭제하시겠습니까?")) {
+                this.$axios.delete('http://localhost:3000/api/board', { params: this.body })
+                    .then((res) => {
+                        if (res.data.result) {
+                            alert("삭제되었습니다.");
+                            this.fnList();
+                        } else {
+                            alert("실행중 실패했습니다.\n다시 이용해 주세요.");
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            }
         }
     }
 }

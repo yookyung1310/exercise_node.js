@@ -108,6 +108,7 @@ exports.mod = (req, res) => { //수정 모듈
 
 exports.delete = (req, res) => {
     body = req.query;
+    console.log(body)
     sql = " DELETE FROM tb_board WHERE num = ? ";
     dbcon.query(sql, [body.num], (err, result) => {
         if (err) throw err;

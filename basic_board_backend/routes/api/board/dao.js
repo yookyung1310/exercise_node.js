@@ -97,9 +97,9 @@ exports.mod = (req, res) => { //수정 모듈
     body = req.body; //post
     // body = req.query;
     sql = " UPDATE tb_board SET subject = ?, cont = ?, editdate = now() WHERE num = ? ";
-    console.log(req)
-    console.log(body)
-    console.log(req.params)
+    // console.log(req)
+    // console.log(body)
+    // console.log(req.params)
     conn.query(sql, [body.subject, body.cont, body.num], (err, result) => {
         if (err) throw err;
         res.send({ success: true });
@@ -108,9 +108,9 @@ exports.mod = (req, res) => { //수정 모듈
 
 exports.delete = (req, res) => {
     body = req.query;
-    console.log(body)
+    // console.log(body.num)
     sql = " DELETE FROM tb_board WHERE num = ? ";
-    dbcon.query(sql, [body.num], (err, result) => {
+    conn.query(sql, [body.num], (err, result) => {
         if (err) throw err;
         res.send({ success: true, result: result });
     })
